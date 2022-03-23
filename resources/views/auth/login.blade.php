@@ -26,9 +26,8 @@
                                     </ul>
 
                                 @endif
-{{--                                @include('shared.notification')--}}
-                                <form class="user" method="POST">
-{{--                                      action="{{route('login_check')}}">--}}
+                                @include('shared.notification')
+                                <form class="user" method="POST" action="{{ route('login.store') }}">
                                     @csrf
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
@@ -46,7 +45,7 @@
                                 </form>
 
                                 <div class="text-center">
-{{--                                    <a class="small" href="{{ url('/register')}}">Create an Account</a>--}}
+                                    <a class="small" href="{{ route('register.index') }}">Create an Account</a>
 
                                 </div>
                                 <div class="text-center">
