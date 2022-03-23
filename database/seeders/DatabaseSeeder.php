@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\EventFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            RoleSeeder::class
+            RoleSeeder::class,
+            CitizenSeeder::class,
+            CertificateSeeder::class,
+            EventSeeder::class,
+            IncidentSeeder::class,
         ]);
     }
 }

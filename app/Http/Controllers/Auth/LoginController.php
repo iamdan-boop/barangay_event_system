@@ -21,6 +21,6 @@ class LoginController extends Controller
         }
 
         auth()->attempt($request->validated());
-        return redirect()->route('/');
+        return redirect()->route('captain.index');
     }
 }
