@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessClearance;
+use App\Models\CitizenCertificate;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class BusinessClearanceController extends Controller
@@ -34,5 +37,28 @@ class BusinessClearanceController extends Controller
         BusinessClearance::create($request->all());
 
         return back()->with(['success' => 'Business Clearance Submitted Successfully']);
+    }
+
+
+    public function businessClearancePDF(BusinessClearance $clearance)
+    {
+        $clearance->load('citizen');
+
+        $citizen_certificate = CitizenCertificate::where(['citizen_id' => $clearance->citizen->id])->first();
+
+        $captain = User::role('captain')->first();
+
+
+        $pdf = Pdf::loadView('certificate.barangay_certificate', [
+            'citizen' => $clearance->citizen,
+            'community_tax' => $citizen_certificate->community_tax,
+            'created_at' => $clearance->created_at,
+            'purpose' => $citizen_certificate->purpose,
+            'captain' => $captain->first_name . ' ' . $captain->last_name,
+            'amount_paid' => $citizen_certificate->amount_paid,
+            'qr_codes' => $citizen_certificate->qr_codes,
+            'control_number' => $citizen_certificate->control_number,
+        ]);
+        return $pdf->stream('document.pdf');
     }
 }

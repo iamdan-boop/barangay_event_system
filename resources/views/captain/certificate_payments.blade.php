@@ -91,7 +91,7 @@
 
                                         @foreach($certificate_payments as $certificate_payment)
                                             <tr>
-                                                <td>{{ $certificate_payment->payor }}</td>
+                                                <td>{{ $certificate_payment->citizen->first_name. ' '. $certificate_payment->citizen->last_name }}</td>
                                                 <td>{{ $certificate_payment->agency }}</td>
                                                 <td>{{ $certificate_payment->certificate }}</td>
                                                 <td>{{ $certificate_payment->payment_method }}</td>
@@ -101,7 +101,8 @@
                                                 <td>{{ $certificate_payment->drawee_bank_date }}</td>
                                                 <td>{{ $certificate_payment->created_at->toDayDateTimeString() }}</td>
                                                 <td>
-{{--                                                    <a href="{{route('view_receipt', $pay->id)}}" class="btn btn-info btn-sm">View Receipt</a>--}}
+                                                    <a href="{{route('treasurer.certificate-payment.pdf', ['certificatePayment' => $certificate_payment->id])}}"
+                                                       class="btn btn-info btn-sm">View Receipt</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -110,7 +111,6 @@
                                 </div>
                             </div>
                         </div>
-
 
 
                     </div>

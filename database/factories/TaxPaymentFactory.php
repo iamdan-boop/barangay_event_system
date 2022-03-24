@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Citizen;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,7 @@ class TaxPaymentFactory extends Factory
     {
         return [
             'agency' => $this->faker->name,
-            'payor' => $this->faker->name,
+            'payor' => Citizen::inRandomOrder()->first()->id,
             'fund' => $this->faker->name,
             'payment_method' => 'GCASH',
             'drawee_bank' => $this->faker->name,

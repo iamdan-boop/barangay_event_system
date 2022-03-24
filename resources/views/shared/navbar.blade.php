@@ -35,13 +35,25 @@
                 </a>
 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button class="btn" type="submit">Logout</button>
-                    </form>
-                </a>
+                @if(auth()->user()->hasRole(['captain', 'secretary']))
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button class="btn" type="submit">Logout</button>
+                        </form>
+                    </a>
+                @endif
+
+                @if(auth()->user()->hasRole(['treasurer']))
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <form action="{{ route('treasurer.logout') }}" method="post">
+                            @csrf
+                            <button class="btn" type="submit">Logout</button>
+                        </form>
+                    </a>
+                @endif
             </div>
         </li>
 

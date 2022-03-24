@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCitizenRequest;
 use App\Models\BusinessClearance;
+use App\Models\Cedula;
 use App\Models\Certificate;
 use App\Models\Citizen;
 use App\Models\CitizenCertificate;
+use App\Models\CitizenPicture;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use BaconQrCode\Encoder\QrCode;
 
 class CitizenController extends Controller
 {
@@ -76,6 +81,7 @@ class CitizenController extends Controller
 
         $qr_value = 'qr_' . rand(10000000, 99999999);
         $control_number = rand(10000000, 99999999);
+
 //
 //        QrCode::size(500)
 //            ->format('png')
@@ -108,7 +114,60 @@ class CitizenController extends Controller
             'grossreceipt_taxable' => 'required',
             'salary_taxable' => 'required',
             'income_taxable' => 'required',
+            'interest_cedula' => 'required'
         ]);
+
+
+        $qr_value = 'qr_' . rand(10000000, 99999999);
+        $control_number = rand(10000000, 99999999);
+//
+//        QrCode::size(500)
+//            ->format('png')
+//            ->generate($qr_value, public_path('qr_codes/' . $qr_value . '.png'));
+
+
+        $cedula = Cedula::create([
+            'citizen_id' => $request->citizen_id,
+            'certificate_id' => $request->certificate_id,
+            'birthplace_cedula' => $request->birthplace,
+            'tin_cedula' => $request->tin_id_cedula,
+            'icr' => $request->icr,
+            'height_cedula' => $request->cedula_height_1 . $request->cedula_height_2,
+            'weight_cedula' => $request->weight_cedula,
+            'basictax' => $request->basictax,
+            'grossreceipt_taxable' => $request->grossreceipt_taxable,
+            'salary_taxable' => $request->salary_taxable,
+            'income_taxable' => $request->income_taxable,
+            'interest_cedula' => $request->interest_cedula,
+            'status_id' => 1,
+            'qr_codes' => $qr_value,
+            'control_number' => $control_number,
+        ]);
+
+
+        $captain = User::role('captain')->first();
+
+        $pdf = Pdf::loadView('certificate.barangay_cedula', [
+            'created_at' => $cedula->created_at,
+            'citizen' => Citizen::find($request->citizen_id),
+            'captain' => $captain->first_name . ' ' . $captain->last_name,
+        ]);
+        return $pdf->stream('document.pdf');
     }
 
+    public function saveCitizenPicture(Request $request)
+    {
+        $find = CitizenPicture::where('citizen_id', $request->user_id)->first();
+        if ($find) {
+            $find->delete();
+        }
+
+        CitizenPicture::create([
+            'citizen_id' => $request->user_id,
+            'image' => $request->image
+        ]);
+
+
+        return response()->json(['status' => 200]);
+    }
 }

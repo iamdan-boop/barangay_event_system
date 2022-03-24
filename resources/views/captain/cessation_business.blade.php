@@ -98,8 +98,8 @@
                                                 <td>{{$cessation->purpose}}</td>
                                                 <td>{{$cessation->created_at->toDayDateTimeString()}}</td>
                                                 <td>
-{{--                                                    <a href="{{route('view_business_cessation_certificate',$ces->id)}}"--}}
-{{--                                                       class="btn btn-success btn-sm">View Business Cessation</a>--}}
+                                                    <a href="{{route('cessation-business.pdf',['cessation' => $cessation->id])}}"
+                                                       class="btn btn-success btn-sm">View Business Cessation</a>
                                                 </td>
                                             </tr>
                                         @endforeach

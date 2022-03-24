@@ -110,8 +110,9 @@
                                         <td>{{$citizen_certificate->purpose}}</td>
                                         <td>{{$citizen_certificate->created_at->toDayDateTimeString()}}</td>
                                         <td>
-                                            {{--                                        <a href="{{route('view_certificate',$ind->id)}}" class="btn btn-success btn-sm">View--}}
-                                            {{--                                            Certificate</a>--}}
+                                            <a href="{{route('certificate-citizen', ['citizenCertificate' => $citizen_certificate->id])}}"
+                                               class="btn btn-success btn-sm">View
+                                                Certificate</a>
                                         </td>
                                     </tr>
                                 @endforeach

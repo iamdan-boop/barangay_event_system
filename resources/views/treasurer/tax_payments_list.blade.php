@@ -19,7 +19,7 @@
                     <div class="sidebar-brand-text mx-3 text-capitalize">Barangay Records Management</div>
                 </a>
 
-                @include('shared.captain_sidebar')
+                @include('shared.treasurer_sidebar')
 
             </ul>
             <div id="content-wrapper" class="d-flex flex-column">
@@ -82,17 +82,16 @@
                                             <th>Drawee Number</th>
                                             <th>Drawee Date</th>
                                             <th>Date Issued</th>
-                                            <th>Actions</th>
-
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
                                         @foreach($tax_payments as $tax_payment)
                                             <tr>
-                                                <td>{{ $tax_payment->citizen->first_name. ' '. $tax_payment->citizen->last_name }}</td>
+                                                <td>{{ $tax_payment->payor }}</td>
                                                 <td>{{ $tax_payment->agency }}</td>
-                                                <td>{{ $tax_payment->nature_of_collection }}</td>
+                                                <td> {{ $tax_payment->nature_of_collection }} </td>
                                                 <td>{{ $tax_payment->payment_method }}</td>
                                                 <td>{{ $tax_payment->fund }}</td>
                                                 <td>{{ $tax_payment->drawee_bank }}</td>

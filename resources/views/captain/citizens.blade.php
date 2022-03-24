@@ -135,10 +135,13 @@
                                                     @endif
 
                                                     @if ($citizen->status_id == 0)
-                                                        <form action="{{ route('unarchived-citizen') }}" method="post">
+                                                        <form
+                                                            action="{{ route('unarchived-citizen', ['citizen' => $citizen->id ]) }}"
+                                                            method="post">
                                                             @csrf
+                                                            @method('PUT')
                                                             <button type="submit"
-                                                                    href="{{ route('unarchived-citizen', ['citizen' => $citizen->id]) }}"
+                                                                    {{--                                                                    href="{{ route('unarchived-citizen', ['citizen' => $citizen->id]) }}"--}}
                                                                     class="btn btn-success btn-sm">Unarchive
                                                             </button>
                                                         </form>
@@ -606,7 +609,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form method="POST">
+                        <form method="POST" action="{{ route('citizen.cedula') }}">
                             @csrf
                             <input type="hidden" name="citizen_id" id="citizen_id_cedula" value="0">
                             <!-- <input type="hidden" name="citizen_id" id="business_citizen_id"> -->
@@ -654,7 +657,7 @@
                                            class="form-control" maxlength="1" required
                                            value="{{old('height1_cedula')}}">
                                     &nbsp; ' &nbsp;
-                                    <input type="text" name="cedula_height_1" style="width: 45px;" placeholder="2"
+                                    <input type="text" name="cedula_height_2" style="width: 45px;" placeholder="2"
                                            class="form-control" minlength="1" maxlength="2" required
                                            value="{{old('height2_cedula')}}">
                                     &nbsp; " &nbsp;
@@ -748,6 +751,33 @@
         </div>
     </div>
 
+    <div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Camera Preview</h5>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div id="my_camera"></div>
+                    </div>
+
+
+                    <div class="row">
+                        <button class="btn btn-danger btn-block take_picture">Take Snapshot</button>
+                        <div id="results">Your captured image will appear here...</div>
+                        <button class="btn btn-success btn-block" id="doneBtnCloseCamera" style="display: none;">DONE
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script type="text/javascript">
             $(document).ready(function () {
@@ -797,13 +827,11 @@
                         document.getElementById('results').innerHTML = '<img src="' + temp_image + '"/>';
                         $.ajax({
                             type: 'POST',
-                            url: save_image,
-                            data: {_token: token, user_id: temp_picture_user_id, image: temp_image},
+                            url: ' {{ route('save-citizen-picture') }} ',
+                            data: {_token: ' {{ csrf_token() }}', user_id: temp_picture_user_id, image: temp_image},
                             success: function (data) {
                                 console.log(data);
                                 $("#doneBtnCloseCamera").show();
-
-
                             }
                         });
 

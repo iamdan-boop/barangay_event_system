@@ -97,8 +97,8 @@
                                                 <td>{{$buss->applied_for}}</td>
                                                 <td>{{$buss->created_at->toDayDateTimeString()}}</td>
                                                 <td>
-{{--                                                    <a href="{{route('view_business_certificate',$buss->id)}}"--}}
-{{--                                                       class="btn btn-success btn-sm">View Business Clearance</a>--}}
+                                                    <a href="{{ route('business-clearance.pdf', ['clearance' => $buss->id]) }}"
+                                                       class="btn btn-success btn-sm">View Business Clearance</a>
                                                 </td>
 
                                             </tr>

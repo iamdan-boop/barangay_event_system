@@ -19,7 +19,7 @@
                     <div class="sidebar-brand-text mx-3 text-capitalize">Barangay Records Management</div>
                 </a>
 
-                @include('shared.captain_sidebar')
+                @include('shared.treasurer_sidebar')
 
             </ul>
             <div id="content-wrapper" class="d-flex flex-column">
@@ -56,7 +56,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">TAX PAYMENTS</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">CERTIFICATE PAYMENTS</h6>
 
                             </div>
                             <div class="card-body">
@@ -75,44 +75,42 @@
                                         <tr>
                                             <th>Payor</th>
                                             <th>Agency</th>
-                                            <th>Nature of Collection</th>
+                                            <th>Certificate</th>
                                             <th>Payment Method</th>
                                             <th>Total Amount</th>
                                             <th>Drawee Bank (for Money Order)</th>
                                             <th>Drawee Number</th>
                                             <th>Drawee Date</th>
                                             <th>Date Issued</th>
-                                            <th>Actions</th>
+                                            <th>Action</th>
 
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        @foreach($tax_payments as $tax_payment)
+
+                                        @foreach($certificate_payments as $certificate_payment)
                                             <tr>
-                                                <td>{{ $tax_payment->citizen->first_name. ' '. $tax_payment->citizen->last_name }}</td>
-                                                <td>{{ $tax_payment->agency }}</td>
-                                                <td>{{ $tax_payment->nature_of_collection }}</td>
-                                                <td>{{ $tax_payment->payment_method }}</td>
-                                                <td>{{ $tax_payment->fund }}</td>
-                                                <td>{{ $tax_payment->drawee_bank }}</td>
-                                                <td>{{ $tax_payment->drawee_bank_number }}</td>
-                                                <td>{{ $tax_payment->drawee_bank_date }}</td>
-                                                <td>{{ $tax_payment->created_at->toDayDateTimeString() }}</td>
+                                                <td>{{$certificate_payment->citizen->first_name. ' '. $certificate_payment->citizen->middle_name. ' '. $certificate_payment->last_name}}</td>
+                                                <td>{{$certificate_payment->agency}}</td>
+                                                <td>{{$certificate_payment->certificate}}</td>
+                                                <td>{{$certificate_payment->payment_method}}</td>
+                                                <td>{{$certificate_payment->fund}}</td>
+                                                <td>{{$certificate_payment->drawee_bank}}</td>
+                                                <td>{{$certificate_payment->drawee_bank_number}}</td>
+                                                <td>{{$certificate_payment->drawee_bank_date}}</td>
+                                                <td>{{$certificate_payment->created_at->toDayDateTimeString()}}</td>
                                                 <td>
-                                                    <a class="btn btn-success"
-                                                       href="{{ route('treasurer.tax-payment.pdf', ['taxPayment' => $tax_payment->id]) }}">View
-                                                        Receipt</a>
+                                                    <a href="{{route('treasurer.certificate-payment.pdf', $certificate_payment->id)}}"
+                                                       class="btn btn-info btn-sm">View Receipt</a>
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        ]
 
                     </div>
                     <!-- /.container-fluid -->
