@@ -9,7 +9,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block">
-                        <img src="{{ asset('images/registration.png') }}" class="" style="width:480px;height:900px;">
+                        <img src="{{ secure_asset('images/registration.png') }}" class="" style="width:480px;height:900px;">
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">

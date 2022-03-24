@@ -9,7 +9,7 @@
     <title>Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ secure_asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css" rel="stylesheet">
@@ -20,7 +20,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ secure_asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="bg-gradient-primary">
@@ -36,23 +36,23 @@
 </footer>
 @stack('scripts')
 
-<script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{ secure_asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ secure_asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+<script src="{{ secure_asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+<script src="{{secure_asset('js/sb-admin-2.min.js')}}"></script>
 
 <!-- Page level plugins -->
-<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ secure_asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ secure_asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{ asset('js/demo/datatables-demo.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/webcam.min.js')}}"></script>
+<script src="{{ secure_asset('js/demo/datatables-demo.js')}}"></script>
+<script type="text/javascript" src="{{ secure_asset('js/webcam.min.js')}}"></script>
 
 </body>
 </html>
