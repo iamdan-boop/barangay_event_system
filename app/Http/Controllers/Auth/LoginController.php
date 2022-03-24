@@ -24,6 +24,9 @@ class LoginController extends Controller
 
         auth()->attempt($request->validated());
 
+        if (auth()->user()->hasRole(['admin'])) {
+            return redirect()->route('admin_home');
+        }
         if (auth()->user()->hasRole(['captain', 'secretary'])) {
             return redirect()->route('captain.index');
         }

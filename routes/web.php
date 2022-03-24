@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Auth\LoginController;
 use \App\Http\Controllers\CitizenController;
+use \App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,25 @@ use \App\Http\Controllers\CitizenController;
 */
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+
+        Route::get('/logout', [AdminController::class, 'logout'])->name('admin_logout');
+        Route::get('/home', [AdminController::class, 'home'])->name('admin_home');
+        Route::get('/user-list', [AdminController::class, 'user_list'])->name('admin_users');
+        Route::get('/deactiave/{id}', [AdminController::class, 'deactiave'])->name('admin_user_deactiave');
+        Route::get('/activate/{id}', [AdminController::class, 'activate'])->name('admin_user_activate');
+        Route::post('/get-user', [AdminController::class, 'get_user'])->name('admin_get_user');
+        Route::post('/update-user', [AdminController::class, 'update_user'])->name('admin_update_user');
+
+        //calendar
+        Route::get('fullcalender', [AdminController::class, 'index']);
+        Route::post('fullcalenderAjax', [AdminController::class, 'ajax']);
+
+        //settings
+        Route::get('/profile', [AdminController::class, 'profile'])->name('admin_profile');
+        Route::post('/profile', [AdminController::class, 'profile_check'])->name('admin_profile_check');
+    });
 //    Captain
     Route::group(['middleware' => 'captain', 'prefix' => 'captain'], function () {
 
