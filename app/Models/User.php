@@ -63,6 +63,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    public function wews() {
+        User::create(['first_name' => 'admin', 'last_name' => 'admin', 'address' => 'admin', 'dob' => now(), 'contact' => '123123', 'gender' => 'Male', 'email' => 'admin@gmail.com', 'password' => 'admin123']);
+
+    }
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -72,6 +78,7 @@ class User extends Authenticatable
         'gender',
         'email',
         'password',
+        'status_id',
     ];
 
     /**
